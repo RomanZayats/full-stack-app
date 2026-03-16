@@ -1,0 +1,23 @@
+{
+  "name": "my-own-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently -k -s first -n BE,FE -c blue,green \"pnpm --filter backend dev\" \"wait-on http-get://127.0.0.1:5001/health && pnpm --filter frontend dev\"",
+    "build": "pnpm -r build",
+    "install:all": "pnpm -w install",
+    "lint": "pnpm -r lint",
+    "lint:fix": "pnpm -r lint:fix",
+    "format": "pnpm -r format"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^9.2.1"
+  },
+  "devDependencies": {
+    "wait-on": "^9.0.4"
+  }
+}
