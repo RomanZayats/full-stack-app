@@ -9,7 +9,8 @@
     "install:all": "pnpm -w install",
     "lint": "pnpm -r lint",
     "lint:fix": "pnpm -r lint:fix",
-    "format": "pnpm -r format"
+    "format": "pnpm -r format",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +19,17 @@
     "concurrently": "^9.2.1"
   },
   "devDependencies": {
+    "husky": "^8.0.0",
+    "lint-staged": "^16.4.0",
     "wait-on": "^9.0.4"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "pnpm -w lint:fix",
+      "pnpm -w format"
+    ],
+    "*.{json,md,html,css,scss}": [
+      "pnpm -w format"
+    ]
   }
 }
