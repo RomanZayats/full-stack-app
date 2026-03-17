@@ -7,14 +7,15 @@ import { env } from '../config/env';
 import { JWT_CONFIG } from '../config/security';
 import { AppError } from '../errors/AppError';
 import { User } from '../models/user.model';
+import { LoginDto, RegisterDto } from '../schemas/auth.schema';
 
-export const registerUser = async (email: string, password: string) => {
+export const registerUser = async (data: RegisterDto) => {
+  const { email, password } = data;
   const existing = await User.findOne({ email });
   if (existing) throw new AppError('Email already exists', 400);
 
   try {
     const hashed = await bcrypt.hash(password, 10);
-
     return await User.create({ email, password: hashed });
   } catch (e: unknown) {
     if (e instanceof AppError) throw e;
@@ -28,7 +29,8 @@ export const registerUser = async (email: string, password: string) => {
   }
 };
 
-export const loginUser = async (email: string, password: string) => {
+export const loginUser = async (data: LoginDto) => {
+  const { email, password } = data;
   const user = await User.findOne({ email });
   if (!user) throw new AppError('Invalid credentials', 401);
 

@@ -10,4 +10,10 @@ declare module 'express-serve-static-core' {
   interface Request extends RequestMeta {
     user?: AppJwtPayload;
   }
+
+  interface Locals {
+    body?: unknown;
+    query?: unknown;
+    params?: unknown;
+  }
 }

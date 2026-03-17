@@ -2,20 +2,23 @@ import type { Request, Response, NextFunction } from 'express';
 
 import { COOKIE_NAMES } from '../config/constants';
 import { cookieOptions } from '../config/security';
+import { LoginDto, RegisterDto } from '../schemas/auth.schema';
 import { registerUser, loginUser } from '../services/auth.service';
 
-export const register = async (req: Request, res: Response, next: NextFunction) => {
+export const register = async (_req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = await registerUser(res.locals.body.email, res.locals.body.password);
+    const data = res.locals.body as RegisterDto;
+    const user = await registerUser(data);
     res.status(201).json({ user });
   } catch (e) {
     next(e);
   }
 };
 
-export const login = async (req: Request, res: Response, next: NextFunction) => {
+export const login = async (_req: Request, res: Response, next: NextFunction) => {
   try {
-    const { token, user } = await loginUser(res.locals.body.email, res.locals.body.password);
+    const data = res.locals.body as LoginDto;
+    const { token, user } = await loginUser(data);
 
     res.cookie(COOKIE_NAMES.auth, token, cookieOptions.auth());
 
