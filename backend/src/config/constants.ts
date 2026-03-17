@@ -2,11 +2,11 @@ import ms from 'ms';
 
 export const DURATIONS = {
   jwt: {
-    access: ms('1d'), // 1 day in ms
-    // refresh: 7 * MS.day, // example if you add refresh tokens later
+    access: ms('15m'),
+    refresh: ms('7d'),
   },
   cookies: {
-    auth: ms('1d'), // 1 day in ms
+    auth: ms('7d'),
   },
 } as const;
 
@@ -23,6 +23,7 @@ export const RATE_LIMIT = {
 
 export const COOKIE_NAMES = {
   auth: 'token',
+  refresh: 'refreshToken',
 } as const;
 
 export const HEADER_NAMES = {

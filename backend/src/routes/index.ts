@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { auth } from '../middleware/auth.middleware';
+// import { auth } from '../middleware/auth.middleware';
 
 import authRoute from './auth.route';
 import homeRoute from './home.route';

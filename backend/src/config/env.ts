@@ -10,6 +10,7 @@ const EnvSchema = z.object({
     .transform((v) => Number(v))
     .default(5001),
   JWT_SECRET: z.string().min(1, 'JWT_SECRET is required'),
+  JWT_REFRESH_SECRET: z.string().min(1, 'JWT_REFRESH_SECRET is required'),
   DATABASE_URL: z.string().min(1, 'DATABASE_URL is required'),
   // Cookies / CORS (optional)
   FRONTEND_ORIGIN: z.string().min(1, 'FRONTEND_ORIGIN is required'),
@@ -27,6 +28,7 @@ export const env = {
   isProd: parsed.data.NODE_ENV === 'production',
   port: parsed.data.PORT,
   jwtSecret: parsed.data.JWT_SECRET,
+  jwtRefreshSecret: parsed.data.JWT_SECRET,
   dbUrl: parsed.data.DATABASE_URL,
   frontendOrigin: parsed.data.FRONTEND_ORIGIN,
 } as const;
